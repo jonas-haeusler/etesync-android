@@ -14,7 +14,6 @@ import android.content.ContentUris
 import android.content.ContentValues
 import android.net.Uri
 import android.os.RemoteException
-import android.provider.CalendarContract
 import android.provider.CalendarContract.*
 import at.bitfire.ical4android.*
 import com.etebase.client.CollectionAccessLevel
@@ -22,7 +21,6 @@ import com.etesync.syncadapter.CachedCollection
 import com.etesync.syncadapter.log.Logger
 import com.etesync.syncadapter.model.JournalEntity
 import com.etesync.syncadapter.resource.LocalEvent.Companion.COLUMN_UID
-import org.apache.commons.lang3.StringUtils
 import java.util.*
 import java.util.logging.Level
 
@@ -112,8 +110,8 @@ class LocalCalendar private constructor(
                 }
             }
             values.put(Calendars.ALLOWED_REMINDERS, Reminders.METHOD_ALERT)
-            values.put(Calendars.ALLOWED_AVAILABILITY, StringUtils.join(intArrayOf(Reminders.AVAILABILITY_TENTATIVE, Reminders.AVAILABILITY_FREE, Reminders.AVAILABILITY_BUSY), ","))
-            values.put(Calendars.ALLOWED_ATTENDEE_TYPES, StringUtils.join(intArrayOf(CalendarContract.Attendees.TYPE_OPTIONAL, CalendarContract.Attendees.TYPE_REQUIRED, CalendarContract.Attendees.TYPE_RESOURCE), ", "))
+            values.put(Calendars.ALLOWED_AVAILABILITY, intArrayOf(Reminders.AVAILABILITY_TENTATIVE, Reminders.AVAILABILITY_FREE, Reminders.AVAILABILITY_BUSY).joinToString(separator = ","))
+            values.put(Calendars.ALLOWED_ATTENDEE_TYPES, intArrayOf(Attendees.TYPE_OPTIONAL, Attendees.TYPE_REQUIRED, Attendees.TYPE_RESOURCE).joinToString(separator = ","))
             return values
         }
 
@@ -136,8 +134,8 @@ class LocalCalendar private constructor(
             }
 
             values.put(Calendars.ALLOWED_REMINDERS, Reminders.METHOD_ALERT)
-            values.put(Calendars.ALLOWED_AVAILABILITY, StringUtils.join(intArrayOf(Reminders.AVAILABILITY_TENTATIVE, Reminders.AVAILABILITY_FREE, Reminders.AVAILABILITY_BUSY), ","))
-            values.put(Calendars.ALLOWED_ATTENDEE_TYPES, StringUtils.join(intArrayOf(CalendarContract.Attendees.TYPE_OPTIONAL, CalendarContract.Attendees.TYPE_REQUIRED, CalendarContract.Attendees.TYPE_RESOURCE), ", "))
+            values.put(Calendars.ALLOWED_AVAILABILITY, intArrayOf(Reminders.AVAILABILITY_TENTATIVE, Reminders.AVAILABILITY_FREE, Reminders.AVAILABILITY_BUSY).joinToString(separator = ","))
+            values.put(Calendars.ALLOWED_ATTENDEE_TYPES, intArrayOf(Attendees.TYPE_OPTIONAL, Attendees.TYPE_REQUIRED, Attendees.TYPE_RESOURCE).joinToString(separator = ","))
             return values
         }
     }
